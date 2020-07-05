@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     add() {
-      this.operator = (a, b) => a + b;
+      this.operator = (a, b) => `${a + b}`;
       this.setPrevious();
     },
     append(number) {
@@ -60,7 +60,7 @@ export default {
       this.current = "";
     },
     divide() {
-      this.operator = (a, b) => a / b;
+      this.operator = (a, b) => `${a / b}`;
       this.setPrevious();
     },
     dot() {
@@ -77,7 +77,7 @@ export default {
       this.previous = null;
     },
     multiply() {
-      this.operator = (a, b) => a * b;
+      this.operator = (a, b) => `${a * b}`;
       this.setPrevious();
     },
     percent() {
@@ -88,15 +88,17 @@ export default {
       this.operatorClicked = true;
     },
     sign() {
-      // take '' into account
-      // take answer into account
-      this.current =
-        this.current.charAt(0) === "-"
-          ? this.current.slice(1)
-          : `-${this.current}`;
+      if (this.current === "") {
+        return;
+      } else {
+        this.current =
+          this.current.charAt(0) === "-"
+            ? this.current.slice(1)
+            : `-${this.current}`;
+      }
     },
     subtract() {
-      this.operator = (a, b) => a - b;
+      this.operator = (a, b) => `${a - b}`;
       this.setPrevious();
     },
   },
