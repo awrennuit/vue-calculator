@@ -1,30 +1,32 @@
 <template>
-  <div class="calculator">
-    <div id="display">{{ current || "0" }}</div>
+  <div id="calculator-body">
+    <div id="calculator">
+      <div id="display">{{ current || "0" }}</div>
 
-    <div class="btn" @click="clear">C</div>
-    <div class="btn" @click="sign">+/-</div>
-    <div class="btn" @click="percent">%</div>
-    <div class="btn operator" @click="divide">÷</div>
+      <div class="btn" @click="clear">C</div>
+      <div class="btn" @click="sign">+/-</div>
+      <div class="btn" @click="percent">%</div>
+      <div class="btn operator" @click="divide">÷</div>
 
-    <div class="btn" @click="append('7')">7</div>
-    <div class="btn" @click="append('8')">8</div>
-    <div class="btn" @click="append('9')">9</div>
-    <div class="btn operator" @click="multiply">x</div>
+      <div class="btn" @click="append('7')">7</div>
+      <div class="btn" @click="append('8')">8</div>
+      <div class="btn" @click="append('9')">9</div>
+      <div class="btn operator" @click="multiply">x</div>
 
-    <div class="btn" @click="append('4')">4</div>
-    <div class="btn" @click="append('5')">5</div>
-    <div class="btn" @click="append('6')">6</div>
-    <div class="btn operator" @click="subtract">-</div>
+      <div class="btn" @click="append('4')">4</div>
+      <div class="btn" @click="append('5')">5</div>
+      <div class="btn" @click="append('6')">6</div>
+      <div class="btn operator" @click="subtract">-</div>
 
-    <div class="btn" @click="append('1')">1</div>
-    <div class="btn" @click="append('2')">2</div>
-    <div class="btn" @click="append('3')">3</div>
-    <div class="btn operator" @click="add">+</div>
+      <div class="btn" @click="append('1')">1</div>
+      <div class="btn" @click="append('2')">2</div>
+      <div class="btn" @click="append('3')">3</div>
+      <div class="btn operator" @click="add">+</div>
 
-    <div class="btn" id="zero" @click="append('0')">0</div>
-    <div class="btn" @click="dot">.</div>
-    <div class="btn operator" @click="equals">=</div>
+      <div class="btn" id="zero" @click="append('0')">0</div>
+      <div class="btn" @click="dot">.</div>
+      <div class="btn operator" @click="equals">=</div>
+    </div>
   </div>
 </template>
 
@@ -54,7 +56,6 @@ export default {
       this.current = `${+this.current / 100}`;
     },
     append(number) {
-      // take '' and 0 into account
       if (this.operatorClicked) {
         this.current = "";
         this.operatorClicked = false;
@@ -94,16 +95,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#display {
-  background-color: pink;
-  grid-column: 1 / 5;
+#calculator-body {
+  background-color: #6d6875;
+  border-radius: 4px;
+  height: 400px;
+  margin: 0 auto;
+  padding: 20px 10px 10px 10px;
+  width: 400px;
 }
 
-#zero {
-  grid-column: 1 / 3;
-}
-
-.calculator {
+#calculator {
   display: grid;
   font-size: 40px;
   grid-template-columns: repeat(4, 1fr);
@@ -112,13 +113,36 @@ export default {
   width: 400px;
 }
 
+#display {
+  background-color: #b5838d;
+  color: #ffcdb2;
+  grid-column: 1 / 5;
+  margin: 2px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+#zero {
+  grid-column: 1 / 3;
+}
+
 .btn {
-  background-color: #f2f2f2;
-  border: 1px solid #999;
+  background: radial-gradient(#ffcdb2, #ffcdb2, #b5838d);
+  border: 1px solid #6d6875;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.btn:active {
+  background: radial-gradient(#ffcdb2, #b5838d);
 }
 
 .operator {
-  background: orange;
-  color: white;
+  background: radial-gradient(#e5989b, #e5989b, #b5838d);
+}
+
+.operator:active {
+  background: radial-gradient(#e5989b, #b5838d);
 }
 </style>
