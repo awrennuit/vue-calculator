@@ -60,7 +60,11 @@ export default {
         this.current = "";
         this.operatorClicked = false;
       }
-      this.current = `${this.current}${number}`;
+      if (this.current === "0" && number === "0") {
+        return;
+      } else {
+        this.current = `${this.current}${number}`;
+      }
     },
     dot() {
       this.current.indexOf(".") === -1 ? this.append(".") : null;
