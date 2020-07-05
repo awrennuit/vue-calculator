@@ -67,7 +67,13 @@ export default {
       }
     },
     dot() {
-      this.current.indexOf(".") === -1 ? this.append(".") : null;
+      if (this.current.indexOf(".") === -1) {
+        if (this.current === "") {
+          this.append("0.");
+        } else {
+          this.append(".");
+        }
+      }
     },
     setPrevious() {
       this.previous = this.current;
