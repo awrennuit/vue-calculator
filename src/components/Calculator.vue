@@ -41,19 +41,9 @@ export default {
     };
   },
   methods: {
-    clear() {
-      this.current = "";
-    },
-    sign() {
-      // take '' into account
-      // take answer into account
-      this.current =
-        this.current.charAt(0) === "-"
-          ? this.current.slice(1)
-          : `-${this.current}`;
-    },
-    percent() {
-      this.current = `${+this.current / 100}`;
+    add() {
+      this.operator = (a, b) => a + b;
+      this.setPrevious();
     },
     append(number) {
       if (this.operatorClicked) {
@@ -66,6 +56,13 @@ export default {
         this.current = `${this.current}${number}`;
       }
     },
+    clear() {
+      this.current = "";
+    },
+    divide() {
+      this.operator = (a, b) => a / b;
+      this.setPrevious();
+    },
     dot() {
       if (this.current.indexOf(".") === -1) {
         if (this.current === "") {
@@ -75,29 +72,32 @@ export default {
         }
       }
     },
-    setPrevious() {
-      this.previous = this.current;
-      this.operatorClicked = true;
-    },
-    add() {
-      this.operator = (a, b) => a + b;
-      this.setPrevious();
-    },
-    divide() {
-      this.operator = (a, b) => a / b;
-      this.setPrevious();
+    equals() {
+      this.current = this.operator(+this.previous, +this.current);
+      this.previous = null;
     },
     multiply() {
       this.operator = (a, b) => a * b;
       this.setPrevious();
     },
+    percent() {
+      this.current = `${+this.current / 100}`;
+    },
+    setPrevious() {
+      this.previous = this.current;
+      this.operatorClicked = true;
+    },
+    sign() {
+      // take '' into account
+      // take answer into account
+      this.current =
+        this.current.charAt(0) === "-"
+          ? this.current.slice(1)
+          : `-${this.current}`;
+    },
     subtract() {
       this.operator = (a, b) => a - b;
       this.setPrevious();
-    },
-    equals() {
-      this.current = this.operator(+this.previous, +this.current);
-      this.previous = null;
     },
   },
 };
